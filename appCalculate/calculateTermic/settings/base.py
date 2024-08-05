@@ -34,6 +34,7 @@ BASE_APPS = [
 ]
 
 LOCAL_APPS = [
+    'apps.core',
     'apps.calculate',
     'apps.materials',
     'apps.papers'
