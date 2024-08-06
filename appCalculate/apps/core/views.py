@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
 
-# Create your views here.
 
 def inicio(request):
-    print("Esto es una vista")
-    return HttpResponse("hello")
+    template = loader.get_template("core/index.html")
+    context = {
+        "titulo" : "Inicio"
+    }
+    return HttpResponse(template.render(context, request))
+
