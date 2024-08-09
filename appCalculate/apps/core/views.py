@@ -1,12 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import loader
+from django.views.generic import TemplateView
+from apps.materials.models import Materials
 
-
-def inicio(request):
-    template = loader.get_template("core/index.html")
-    context = {
-        "titulo" : "Inicio"
-    }
-    return HttpResponse(template.render(context, request))
-
+class IndexTemplateView(TemplateView):
+    template_name = 'core/index.html'

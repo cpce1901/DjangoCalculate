@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Persona
+from .models import Logo
 
-@admin.register(Persona)
-class PersonasAdministrador(admin.ModelAdmin):
+@admin.register(Logo)
+class logoAdmin(admin.ModelAdmin):
     pass
 
