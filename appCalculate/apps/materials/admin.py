@@ -5,3 +5,4 @@ from .models import Materials
 @admin.register(Materials)
 class MaterialsAdmin(admin.ModelAdmin):
     pass
+

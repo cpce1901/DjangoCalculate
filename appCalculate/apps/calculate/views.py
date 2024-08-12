@@ -1,6 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import TemplateView
 
-# Create your views here.
-def calculo_emision_co2(request):
-    return HttpResponse("CO2")
+
+class CalculateEmitCO2TemplateView(TemplateView):
+    template_name = 'calculate/co2_calculate_select_materials.html'

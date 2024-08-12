@@ -1,8 +1,10 @@
 from django.urls import path
-from .views import calculo_emision_co2
+from .views import CalculateEmitCO2TemplateView
+
+app_name = 'calculate'
 
 urlpatterns = [
-    path('factor-co2/', calculo_emision_co2, name='co2'),
+    path('factor-co2/', CalculateEmitCO2TemplateView.as_view(), name='co2'),
     
 ]
 

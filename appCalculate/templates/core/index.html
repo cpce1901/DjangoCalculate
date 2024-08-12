@@ -17,9 +17,9 @@
         <button class="w-full py-4 text-xl font-semibold rounded-lg bg-white text-green-700 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform duration-300">
             Transmitancia Térmica
         </button>
-        <button class="w-full py-4 text-xl font-semibold rounded-lg bg-white text-green-700 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform duration-300">
-            Emisión de CO2
-        </button>
+        <a href="{% url 'calculate:co2' %}" class="w-full py-4 rounded-lg bg-white  hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <p class="text-green-700 text-xl font-semibold text-center">Emisión de CO2</p>
+        </a>
         <button class="w-full py-4 text-xl font-semibold rounded-lg bg-white text-green-700 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform duration-300">
             Publicaciones
         </button>
