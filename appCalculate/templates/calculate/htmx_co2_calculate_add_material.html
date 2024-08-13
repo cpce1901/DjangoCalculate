@@ -1,0 +1,20 @@
+<form id="material-form" class="container-fluid flex items-center gap-8">
+    <div class="mb-4">
+        <label for="materials" class="">Material</label>
+        {{ form.materials }}
+    </div>
+    <div class="mb-4">
+        <label for="area" class="">Área</label>
+        {{ form.area }}
+    </div>
+    <div class="mb-4">
+        <label for="thickness" class="">Espesor</label>
+        {{ form.thickness }}
+    </div>
+    <button
+        type="button"
+        hx-on="click: this.closest('form').remove()"
+        class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+        Eliminar
+    </button>
+</form>

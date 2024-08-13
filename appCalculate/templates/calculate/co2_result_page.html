@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}ConfortSmart | Resultado Cálculo CO2 | Gonzalo{% endblock title %}
+
+{% block content %}
+<div class="container-fluid p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-semibold mb-4">Resultado del Cálculo de CO2</h1>
+    
+    <div id="result-container">
+        <p>{{ result }}</p>
+    </div>
+
+    <a href="{% url 'calculate:co2-calculate' %}" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        Volver al Formulario
+    </a>
+</div>
+{% endblock content %}

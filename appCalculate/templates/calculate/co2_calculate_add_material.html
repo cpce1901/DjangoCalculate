@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block title %}ConfortSmart | Cálculo CO2 | Gonzalo{% endblock title %}
+
+{% block content %}
+<div
+    class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-green-600 to-blue-500 text-white">
+
+    <div id="result-container"></div>
+
+    <div class="container w-2/3 flex flex-col justify-evenly items-center bg-slate-100 rounded-md px-5 py-10">
+
+        <h1 class="text-2xl font-semibold text-sky-500 mb-4">Fromulario Add Material</h1>
+
+        <div id="add-material-form">
+
+
+            {% include 'calculate/htmx_co2_calculate_add_material.html' %}
+
+
+
+
+
+
+        </div>
+
+        <div class="container flex justify-evenly items-center my-6">
+            <button 
+                type="button" 
+                hx-get="{% url 'calculate:co2-add' %}" 
+                hx-target="#add-material-form"
+                hx-swap="beforeend"
+                class="bg-green-500 text-white py-2 px-4 w-52 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                add Material
+            </button>
+
+            <button 
+                type="button" 
+                id="calculate-result" 
+                hx-post="{% url 'calculate:co2-result' %}"
+                hx-target="#result-container" 
+                hx-include="#add-material-form"
+                class="bg-sky-500 text-white py-2 px-4 w-52 rounded-md hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50">
+                Calcular
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock content %}

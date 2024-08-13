@@ -41,10 +41,10 @@ LOCAL_APPS = [
 ]
 
 THIRD_APPS = [
-
+    'django_htmx',
 ]
 
-INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
+INSTALLED_APPS = THIRD_APPS + BASE_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [
@@ -55,6 +55,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # HTMX
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'calculateTermic.urls'
