@@ -1,7 +1,10 @@
 from django import forms
 from .models import Items
+from apps.materials.models import Materials
 
 class ItemsForm(forms.ModelForm):
+
+    
     class Meta:
         model = Items
         fields = ['material', 'area', 'thickness']
@@ -24,6 +27,8 @@ class ItemsForm(forms.ModelForm):
                 }
             ),
         }
+
+
 
 
 

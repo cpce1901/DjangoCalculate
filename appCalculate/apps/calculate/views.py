@@ -88,5 +88,17 @@ def calculate_result(request):
         return redirect(reverse('calculate:co2'))
     
     
+def calculate_back(request):
+    if request.method == 'POST':
+        calculate_list = CalculateList.objects.first()
+        if calculate_list:
+            Items.objects.filter(calculate_lists=calculate_list).delete()
+            calculate_list.materials.clear()
+                
+        return redirect(reverse('core:index'))
+    else:
+        return redirect(reverse('core:index'))
+    
+    
 
 

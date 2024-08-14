@@ -11,8 +11,11 @@ class Materials(models.Model):
         verbose_name = "Material"
         verbose_name_plural = "Materiales"
 
-    def __str__(self) -> str:
+    def __rpr__(self) -> str:
         return f"<Material: {self.name} - {self.density} - {self.co2_factor} - {self.thermic_trans}>"
+    
+    def __str__(self) -> str:
+        return f"{self.name.upper()}"
     
 
 
