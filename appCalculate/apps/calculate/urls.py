@@ -1,17 +1,12 @@
 from django.urls import path
-from .views import SelectMaterialsFormView, CalculateTemplateView
-from .views_htmx import add_material_htmx
+from .views import CalculateListView, delete_item, calculate_result
+
 
 app_name = 'calculate'
 
 urlpatterns = [
-    path('factor-co2/', SelectMaterialsFormView.as_view(), name='co2'),
-    path('factor-co2/result/', CalculateTemplateView.as_view(), name='co2-result'),
+    path('factor-co2/', CalculateListView.as_view(), name='co2'),
+    path('delete/<int:item_id>/', delete_item, name='delete_item'),
+    path('calculate-result/', calculate_result, name='calculate_result'),
     ]
 
-
-url_htmx = [
-    path('factor-co2/add/', add_material_htmx, name='co2-add'),
-]
-
-urlpatterns += url_htmx
