@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.core.urls')),
     path('', include('apps.calculate.urls')),
+    path('', include('apps.papers.urls')),
 ]
 
 #Habilitación ficheros estaticos DEV

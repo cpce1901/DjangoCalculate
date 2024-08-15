@@ -4,8 +4,8 @@ from apps.materials.models import Materials
 
 class Items(models.Model):
     material = models.ForeignKey(Materials, on_delete=models.CASCADE)
-    area = models.FloatField()
-    thickness = models.FloatField()
+    area = models.FloatField('Area')
+    thickness = models.FloatField('Espesor')
 
     class Meta:
         verbose_name = "Item"

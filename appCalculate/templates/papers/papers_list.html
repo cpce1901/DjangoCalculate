@@ -5,5 +5,22 @@
 {% block title %}ConfortSmart | Publicaciones | Gonzalo{% endblock title %}
 
 {% block content %}
+   
+
+{% if papers %}
     
+{% for paper in papers %}
+
+    {{ paper.title }}
+
+{% endfor %}
+
+{% else %}
+
+<h1>No existen Publicaciones</h1>
+
+{% endif %}
+
+
+
 {% endblock content %}
