@@ -101,4 +101,16 @@ def calculate_back(request):
     
     
 
+def tarea(request):
 
+    # LLAmar a los mayteriales minomo 2
+
+    # Obtener los datos de interes
+
+    # Realizar calculos
+
+    # devolver al html
+    
+    return redirect(reverse('core:index'))
+    
+    
