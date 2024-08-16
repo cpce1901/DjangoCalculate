@@ -1,13 +1,15 @@
 from django.urls import path
-from .views import CalculateListView, delete_item, calculate_result, calculate_back
+from .views import CalculateListView, DeleteItemView, CalculateResultView, CalculateBackView, ClearCalculateListView
 
 
 app_name = 'calculate'
 
 urlpatterns = [
     path('factor-co2/', CalculateListView.as_view(), name='co2'),
-    path('delete/<int:item_id>/', delete_item, name='delete_item'),
-    path('calculate-result/back/', calculate_back, name='calculate_back'),
-    path('calculate-result/', calculate_result, name='calculate_result'),
+    path('delete/<pk>/', DeleteItemView.as_view(), name='delete_item'),
+    path('calculate-result/back/', CalculateBackView.as_view(), name='calculate_back'),
+    path('calculate-result/', CalculateResultView.as_view(), name='calculate_result'),
+
+    path('clear-list/', ClearCalculateListView.as_view(), name='clear_list'),
     ]
 

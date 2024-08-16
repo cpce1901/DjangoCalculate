@@ -10,13 +10,13 @@ class Items(models.Model):
     class Meta:
         verbose_name = "Item"
         verbose_name_plural = "Items"
-        unique_together = ['material']
 
     def __str__(self) -> str:
         return f"<Material: {self.material.name} - {self.area} - {self.thickness}>"
 
 
 class CalculateList(models.Model):
+    session_key = models.CharField(max_length=40, unique=True)
     materials = models.ManyToManyField(Items, related_name='calculate_lists')
 
     class Meta:
@@ -24,4 +24,4 @@ class CalculateList(models.Model):
         verbose_name_plural = "Lista de Materiales"
 
     def __str__(self) -> str:
-        return f"<Materiales: {self.materials}>"
+        return f"<Lista N°: {self.id}>"
