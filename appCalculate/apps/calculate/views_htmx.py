@@ -15,6 +15,7 @@ class AddItemView(View):
             thickness = form.cleaned_data['thickness']
 
             new_item = {
+                'material.id': material.id,
                 'material_name': material.name,
                 'area': area,
                 'thickness': thickness,
@@ -77,7 +78,6 @@ class ResultView(View):
         items = request.session.get(f'items_{session_id}', [])
 
         total_area = sum(item['area'] for item in items) if items else 0
-        print(total_area)
         context = {
             'result': total_area,
         }
