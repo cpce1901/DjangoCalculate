@@ -1,0 +1,46 @@
+<div class=" mx-2 my-6">
+    <h1 class="text-2xl font-bold text-black mb-4">Lista de Cálculo</h1>
+    <h2 class="text-xl font-semibold text-black mb-2">Items en la lista:</h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                        Material</th>
+                    <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                        Área</th>
+                    <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                        Espesor</th>
+                    <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                        Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200 text-center">
+                {% for item in items %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.material_name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.area }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.thickness }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <form method="get">
+
+                            <button hx-get="{% url 'calculate:delete_item' %}?index={{ forloop.counter0 }}"
+                                hx-target="#item-list" hx-swap="innerHTML"
+                                class="px-2 py-2 rounded-md bg-red-400 shadow-sm shadow-red-600 hover:bg-red-600 transition-all duration-300 text-white">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No hay
+                        items en la lista</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
