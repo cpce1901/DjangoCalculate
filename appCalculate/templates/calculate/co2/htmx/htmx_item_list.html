@@ -44,3 +44,19 @@
 </div>
 
 
+{% if message %}
+
+<script>
+    Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ message }}',
+            confirmButtonText: 'OK',
+            customClass:{
+                confirmButton: 'bg-green-500 w-32'
+            }
+        });
+</script>
+
+    
+{% endif %}

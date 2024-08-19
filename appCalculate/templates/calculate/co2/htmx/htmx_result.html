@@ -6,3 +6,36 @@
 </div>
 
 </p>
+
+{% if message and status == 'error' %}
+
+<script>
+    Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ message }}',
+            confirmButtonText: 'OK',
+            customClass:{
+                confirmButton: 'bg-green-500 w-32'
+            }
+        });
+</script>
+
+{% elif not message and status == 'success' %}
+
+<script>
+    Swal.fire({
+            icon: 'success',
+            title: 'CO2 Calculado',
+            html: '<p class="text-2xl font-semibold text-green-500">{{ result|escapejs }} ppm</p>',
+            confirmButtonText: 'OK',
+            customClass:{
+                confirmButton: 'bg-green-500 w-32',
+                text: 'text-2xl'
+            }
+        });
+</script>
+    
+{% endif %}
+    
+

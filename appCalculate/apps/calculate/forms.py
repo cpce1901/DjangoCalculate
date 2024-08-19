@@ -11,7 +11,7 @@ class ItemsForm(forms.Form):
         widget=forms.Select(
             attrs={
                 "id": "materials",
-                "class": "w-52 p-2 outline outline-1 outline-gray-300 rounded-lg text-black focus:outline-none appearance-none",
+                "class": "w-52 p-2 outline outline-1 outline-gray-300 rounded-lg text-black focus:outline-none appearance-none bg-white text-gray-600",
             }
         ),
     )
@@ -22,7 +22,7 @@ class ItemsForm(forms.Form):
         widget=forms.NumberInput(  # Cambiado a EmailInput
             attrs={
                 "id": "area",
-                "placeholder": "m2",
+                "placeholder": "Ingrese m2",
                 "class": "p-2 outline outline-1 outline-gray-300 bg-white rounded-lg text-gray-600",
             }
         ),
@@ -34,7 +34,7 @@ class ItemsForm(forms.Form):
         widget=forms.NumberInput(
             attrs={
                 "id": "thickness",
-                "placeholder": "mm",
+                "placeholder": "Ingrese mm",
                 "class": "p-2 outline outline-1 outline-gray-300 bg-white rounded-lg text-gray-600",
             }
         ),

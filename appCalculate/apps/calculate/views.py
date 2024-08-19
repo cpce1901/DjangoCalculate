@@ -10,7 +10,7 @@ class CalculateListView(FormView):
     success_url = reverse_lazy('/')
 
     def dispatch(self, request, *args, **kwargs):
-        # Cada vez que se carga la página, restablece la sesión
+        # Limpiar la sesión anterior
         if 'session_id' in request.session:
             del request.session['session_id']
         if 'items' in request.session:
@@ -25,6 +25,5 @@ class CalculateListView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        session_id = self.request.session['session_id']
         context['items'] = self.request.session.get('items', [])
         return context

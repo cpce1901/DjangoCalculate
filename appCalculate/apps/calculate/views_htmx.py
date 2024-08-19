@@ -9,6 +9,15 @@ class AddItemView(View):
         session_id = request.session.get('session_id', None)
         items = request.session.get(f'items_{session_id}', [])
 
+        # Verificar si ya hay 5 elementos
+        if len(items) >= 5:
+            context = {
+                'items': items,  # Mostrar los elementos existentes
+                'message': 'Haz superado el limite de items...'  # Mensaje de advertencia
+            }
+            html = render_to_string('calculate/co2/htmx/htmx_item_list.html', context)
+            return HttpResponse(html)
+
         if form.is_valid():
             material = form.cleaned_data['materials']
             area = form.cleaned_data['area']
@@ -50,9 +59,8 @@ class AddItemView(View):
                 'errors': errors,
             }
             error_html = render_to_string('calculate/co2/htmx/htmx_messages.html', context)
-            return HttpResponse(error_html)
+            return HttpResponse(error_html, status=400)
         
-
 class DeleteItemView(View):
     def get(self, request, *args, **kwargs):
         index = int(request.GET.get('index', -1))
@@ -77,9 +85,19 @@ class ResultView(View):
         session_id = request.session.get('session_id', None)
         items = request.session.get(f'items_{session_id}', [])
 
-        total_area = sum(item['area'] for item in items) if items else 0
-        context = {
-            'result': total_area,
-        }
+        if items:
+            total_area = sum(item['area'] for item in items)
+            context = {
+                'result': total_area,
+                'status': 'success',
+                'message': None,
+            }
+        else:
+            context = {
+                'result': 0,
+                'status': 'error',
+                'message': 'Debes ingresar almenos un elemento...',
+            }
+
         html = render_to_string('calculate/co2/htmx/htmx_result.html', context)
         return HttpResponse(html)
