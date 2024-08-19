@@ -11,24 +11,14 @@
 </head>
 
 <body>
+    <div
+        class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-green-600 to-blue-500 text-white">
 
+        {% block content %}
 
-    {% block content %}
+        {% endblock content %}
 
-    {% endblock content %}
-
-    <script>
-        function sendBeacon() {
-            if (navigator.sendBeacon) {
-                navigator.sendBeacon("{% url 'calculate:clear_list' %}", "");
-            }
-        }
-
-        window.addEventListener("beforeunload", sendBeacon);
-    </script>
-
-
-
+    </div>
 </body>
 
 </html>

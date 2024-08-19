@@ -9,7 +9,7 @@ from .forms import ItemsForm
 from .models import Items, CalculateList
 
 class CalculateListView(FormView):
-    template_name = 'calculate/co2_calculate_add_material.html'
+    template_name = 'calculate/co2/co2_form.html'
     form_class = ItemsForm
     success_url = reverse_lazy('calculate:co2')
 

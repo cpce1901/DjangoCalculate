@@ -1,0 +1,99 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block title %}ConfortSmart | Cálculo CO2 | Gonzalo{% endblock title %}
+
+
+{% block content %}
+
+<div class="container w-2/3 flex flex-col justify-evenly items-center bg-slate-100 rounded-md px-5 py-10">
+
+    <h1 class="text-2xl font-semibold text-sky-500 mb-4">Fromulario Add Material</h1>
+
+    <div id="add-material-form">
+        <form method="post" class="flex justify-center items-center gap-10">
+            {% csrf_token %}
+
+            {{ form.material }}
+
+            {{ form.area }}
+
+            {{ form.thickness }}
+
+            <button type="submit"
+                class="px-2 py-2 rounded-md bg-green-400 shadow-sm shadow-green-600 hover:bg-green-600 transition-all duration-300">Agregar</button>
+        </form>
+
+        {% if messages %}
+        <ul class="mt-4">
+            {% for message in messages %}
+            <li class="text-red-500 font-bold text-sm">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <div class="container mx-auto my-6">
+        <h1 class="text-2xl font-bold text-black mb-4">Lista de Cálculo</h1>
+        <h2 class="text-xl font-semibold text-black mb-2">Items en la lista:</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            Material</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            Área</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            Espesor</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200 text-center">
+                    {% for item in items %}
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.material.name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.area }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.thickness }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <form method="post" action="{% url 'calculate:delete_item' item.id %}">
+                                {% csrf_token %}
+                                <button type="submit"
+                                    class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-all duration-300">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No hay
+                            items en la lista</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="flex justify-center space-x-4 mt-6">
+
+        <form method="post" action="{% url 'calculate:calculate_back' %}">
+            {% csrf_token %}
+            <button type="submit"
+                class="px-4 py-2 w-44 bg-red-500 text-white text-center rounded hover:bg-red-600 transition-all duration-300">Atrás</button>
+        </form>
+        {% if items|length > 0 %}
+
+        <form method="post" action="{% url 'calculate:calculate_result' %}">
+            {% csrf_token %}
+            <button type="submit"
+                class="px-4 py-2 w-44 bg-blue-500 text-white text-center rounded hover:bg-blue-600 transition-all duration-300">Calcular
+                Resultado</button>
+        </form>
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
