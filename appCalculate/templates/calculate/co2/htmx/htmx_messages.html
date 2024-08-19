@@ -1,0 +1,17 @@
+{% if errors %}
+<div class="text-red-500 font-bold text-sm">
+    <ul>
+        {% for field, error_list in errors.items %}
+            <li>
+                <p>{{ field }}:</p>
+                <ul>
+                    {% for error in error_list %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+

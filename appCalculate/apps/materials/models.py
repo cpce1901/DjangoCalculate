@@ -4,7 +4,7 @@ from django.db import models
 class Materials(models.Model):
     name = models.CharField('Nombre', max_length=64)
     density = models.IntegerField('Densidad kg/m3')
-    co2_factor = models.IntegerField('FE Kg/co2')
+    co2_factor = models.FloatField('FE Kg/co2')
     thermic_trans = models.FloatField('Transmitancia térmica')
     
     class Meta:
