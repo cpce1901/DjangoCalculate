@@ -2,16 +2,16 @@
 
 {% load static %}
 
-{% block title %}ConfortSmart | Calculadora CO2 | Gonzalo{% endblock title %}
+{% block title %}ConfortSmart | Calculadora Transmitancia | Gonzalo{% endblock title %}
 
 {% block content %}
 
 <div class="container w-2/3 flex flex-col justify-evenly items-center bg-slate-100 rounded-md px-5 py-10">
 
-    <h1 class="text-3xl font-semibold text-sky-500 mb-4">Formulario Cálculo Co2</h1>
+    <h1 class="text-3xl font-semibold text-sky-500 mb-4">Formulario Cálculo Transmitancia</h1>
 
     <div class="container mx-2 flex justify-around items-center">
-        <form method="post" hx-post="{% url 'calculate:co2-add' %}" hx-target="#item-list" hx-swap="innerHTML"
+        <form method="post" hx-post="{% url 'calculate:trans-add' %}" hx-target="#item-list" hx-swap="innerHTML"
             class="flex justify-center items-center gap-10">
             {% csrf_token %}
 
@@ -39,20 +39,20 @@
         <div class="text-black outline outline-1 outline-gray-100 shadow-md rounded-md p-4">
             <p class="text-black font-exo font-bold text-2xl">Resultado</p>
             <div id="result">
-                {% include 'calculate/co2/htmx/htmx_result.html' %}
+                {% include 'calculate/trans/htmx/htmx_result.html' %}
             </div>
         </div>
     </div>
 
     <div id="item-list" class="container">
-        {% include 'calculate/co2/htmx/htmx_item_list.html' %}
+        {% include 'calculate/trans/htmx/htmx_item_list.html' %}
     </div>
 
     <div class="flex gap-10 items-center">
         <a href="{% url 'core:index' %}"
             class="w-32 text-center px-2 py-2 rounded-md bg-red-400 shadow-sm shadow-red-600 hover:bg-red-600 transition-all duration-300 text-white">Volver</a>
 
-        <button hx-get="{% url 'calculate:co2-result' %}" hx-target="#result" hx-swap="innerHTML"
+        <button hx-get="{% url 'calculate:trans-result' %}" hx-target="#result" hx-swap="innerHTML"
             class=" w-32 text-center px-2 py-2 rounded-md bg-sky-400 shadow-sm shadow-sky-600 hover:bg-sky-600 transition-all duration-300 text-white">Resultado</button>
     </div>
 

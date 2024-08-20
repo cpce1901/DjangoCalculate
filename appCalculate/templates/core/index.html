@@ -12,10 +12,10 @@
 </header>
 
 <section class="w-full max-w-md flex flex-col gap-8 px-6">
-    <button
-        class="w-full py-4 text-xl font-semibold rounded-lg bg-white text-green-700 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform duration-300">
-        Transmitancia Térmica
-    </button>
+    <a href="{% url 'calculate:trans' %}"
+        class="w-full py-4 rounded-lg bg-white  hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform duration-300">
+        <p class="text-green-700 text-xl font-semibold text-center">Transmitancia Térmica</p>
+    </a>
     <a href="{% url 'calculate:co2' %}"
         class="w-full py-4 rounded-lg bg-white  hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-transform duration-300">
         <p class="text-green-700 text-xl font-semibold text-center">Emisión de CO2</p>

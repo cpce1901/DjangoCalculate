@@ -8,6 +8,9 @@ urlpatterns = [
     path('', include('apps.core.urls')),
     path('', include('apps.calculate.urls')),
     path('', include('apps.papers.urls')),
+
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
+  
 ]
 
 #Habilitación ficheros estaticos DEV
