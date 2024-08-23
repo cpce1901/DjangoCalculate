@@ -182,6 +182,7 @@ class DeleteItemTRANSView(View):
         return HttpResponse(html)
 
 
+# Vista HTMX para obtener resultados 
 class ResultTRANSView(View):
     def get(self, request, *args, **kwargs):
         session_id = request.session.get('session_id', None)

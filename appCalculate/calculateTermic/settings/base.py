@@ -43,7 +43,7 @@ LOCAL_APPS = [
 
 THIRD_APPS = [
     'django_htmx',
-    'django_ckeditor_5',
+    'tinymce',
 ]
 
 INSTALLED_APPS = THIRD_APPS + BASE_APPS + LOCAL_APPS

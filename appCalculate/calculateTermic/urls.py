@@ -9,7 +9,8 @@ urlpatterns = [
     path('', include('apps.calculate.urls')),
     path('', include('apps.papers.urls')),
 
-    path("ckeditor5/", include('django_ckeditor_5.urls')),
+    # Editor de texto enriquecido
+    path('tinymce/', include('tinymce.urls')),
   
 ]
 
