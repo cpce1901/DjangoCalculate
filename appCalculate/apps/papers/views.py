@@ -12,11 +12,11 @@ class PaperTemplateView(TemplateView):
 
 
 class PaperDetailView(TemplateView):
-    template_name = 'papers/papers_detail2.html'
+    template_name = 'papers/papers_detail.html'
     model = Papers
 
     def get_context_data(self, **kwargs):
-        id = self.request.GET['pk']
-        print(id)
         context = super().get_context_data(**kwargs)
+        id = self.kwargs["id"]
+        context['paper'] = Papers.objects.get(id=id)
         return context

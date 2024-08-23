@@ -43,7 +43,7 @@ LOCAL_APPS = [
 
 THIRD_APPS = [
     'django_htmx',
-    'tinymce',
+    'django_quill',
 ]
 
 INSTALLED_APPS = THIRD_APPS + BASE_APPS + LOCAL_APPS

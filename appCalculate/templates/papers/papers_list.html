@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div>
+<div class="container mx-auto mt-12 mb-6 text-center">
     <h1 class="text-4xl font-exo font-semibold">Publicaciones</h1>
 </div>
 
@@ -13,15 +13,15 @@
     {% if papers %}
     <div class="">
         {% for paper in papers %}
-        <a href="#" class="bg-white rounded-xl shadow-xl flex items-center justify-center my-10 p-10">
+        <a href="{% url 'papers:paper-detail' paper.id %}" class="bg-white rounded-xl shadow-xl flex items-center justify-center gap-10 my-10 p-10 outline outline-1 outline-green-500/40">
 
             <img src="{{ paper.imagen.url }}" alt="imagen_publication" class="h-64 w-64 object-cover object-center shadow-lg overflow-hidden">
 
             <div class="p-3 flex-1 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-2xl font-bold text-gray-800 truncate">{{ paper.title }}</h3>
-                    <p class=" text-xl text-gray-600 font-medium truncate">{{ paper.author }}</p>
-                    <p class=" text-black font-medium text-sm">{{ paper.details|safe }}</p>
+                    <h3 class="text-2xl font-bold text-gray-800 truncate mb-2">{{ paper.title }}</h3>
+                    <p class=" text-xl text-gray-600 font-medium truncate mb-6">{{ paper.author }}</p>
+                    <p class="text-xl text-gray-600 font-medium line-clamp-3">{{ paper.details }}</p>
                 </div>
 
             </div>
@@ -31,5 +31,10 @@
     {% else %}
     <h1 class="text-2xl font-bold text-gray-800">No existen Publicaciones</h1>
     {% endif %}
+
+    <div class="text-center">
+        <a href="{% url 'core:index' %}"
+            class="w-32 text-center px-2 py-2 rounded-md bg-red-400 shadow-sm shadow-red-600 hover:bg-red-600 transition-all duration-300 text-white">Volver</a>
+    </div>
 </div>
 {% endblock content %}
