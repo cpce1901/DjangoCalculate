@@ -11,7 +11,7 @@ class ItemsForm(forms.Form):
         widget=forms.Select(
             attrs={
                 "id": "materials",
-                "class": "w-52 p-2 outline outline-1 outline-gray-300 rounded-lg text-black focus:outline-none appearance-none bg-white text-gray-600",
+                "class": "p-2 outline outline-1 outline-gray-300 rounded-lg text-black focus:outline-none appearance-none bg-white text-gray-600",
             }
         ),
     )
@@ -29,12 +29,12 @@ class ItemsForm(forms.Form):
     )
 
     thickness = forms.FloatField(
-        label="Espesor mm",
+        label="Espesor m",
         required=True,
         widget=forms.NumberInput(
             attrs={
                 "id": "thickness",
-                "placeholder": "Ingrese mm",
+                "placeholder": "Ingrese m",
                 "class": "p-2 outline outline-1 outline-gray-300 bg-white rounded-lg text-gray-600",
             }
         ),

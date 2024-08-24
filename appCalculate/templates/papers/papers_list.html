@@ -1,40 +1,53 @@
 {% extends 'base/base.html' %}
 {% load static %}
-
 {% block title %}ConfortSmart | Publicaciones | Gonzalo{% endblock title %}
-
 {% block content %}
-
-<div class="container mx-auto mt-12 mb-6 text-center">
-    <h1 class="text-4xl font-exo font-semibold">Publicaciones</h1>
+<div class="container mx-auto mt-8 md:mt-12 mb-6 px-4 text-center">
+    <h1 class="text-3xl md:text-4xl font-exo font-semibold">Publicaciones</h1>
 </div>
-
-<div class=" container m-6 p-10 flex flex-col bg-white rounded-xl shadow-xl outline-1 outline-gray-100">
-    {% if papers %}
-    <div class="">
-        {% for paper in papers %}
-        <a href="{% url 'papers:paper-detail' paper.id %}" class="bg-white rounded-xl shadow-xl flex items-center justify-center gap-10 my-10 p-10 outline outline-1 outline-green-500/40">
-
-            <img src="{{ paper.imagen.url }}" alt="imagen_publication" class="h-64 w-64 object-cover object-center shadow-lg overflow-hidden">
-
-            <div class="p-3 flex-1 flex flex-col justify-between">
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-800 truncate mb-2">{{ paper.title }}</h3>
-                    <p class=" text-xl text-gray-600 font-medium truncate mb-6">{{ paper.author }}</p>
-                    <p class="text-xl text-gray-600 font-medium line-clamp-3">{{ paper.details }}</p>
+<div class="container mx-auto px-4 mb-6">
+    <div class="bg-white rounded-xl shadow-xl p-6 md:p-10">
+        {% if papers %}
+        <div class="space-y-6 md:space-y-10">
+            {% for paper in papers %}
+            <a href="{% url 'papers:paper-detail' paper.id %}"
+                class="block bg-white rounded-xl shadow-xl outline outline-1 outline-green-500/40 hover:scale-[1.005] hover:shadow-2xl transition-all duration-300">
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 md:p-10">
+                    <img src="{{ paper.imagen.url }}" alt="imagen_publication"
+                        class="w-full md:w-64 h-64 object-cover object-center shadow-lg rounded-xl">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">{{ paper.title }}</h3>
+                            <p class="text-lg md:text-xl text-gray-600 font-medium mb-4">{{ paper.author }}</p>
+                            <p class="text-base md:text-lg text-gray-600 line-clamp-3">{{ paper.details }}</p>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
-        </a>
-        {% endfor %}
-    </div>
-    {% else %}
-    <h1 class="text-2xl font-bold text-gray-800">No existen Publicaciones</h1>
-    {% endif %}
-
-    <div class="text-center">
-        <a href="{% url 'core:index' %}"
-            class="w-32 text-center px-2 py-2 rounded-md bg-red-400 shadow-sm shadow-red-600 hover:bg-red-600 transition-all duration-300 text-white">Volver</a>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h1 class="text-2xl font-bold text-gray-800">No existen Publicaciones</h1>
+        {% endif %}
+        <div class="pagination flex flex-wrap justify-center items-center my-8 space-x-2 space-y-2">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="px-3 py-2 rounded-md bg-green-400 shadow-sm shadow-green-600 hover:bg-green-600 transition-all duration-300 text-white">&laquo; Primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-2 rounded-md bg-green-400 shadow-sm shadow-green-600 hover:bg-green-600 transition-all duration-300 text-white">Anterior</a>
+            {% endif %}
+           
+            <span class="px-3 py-2 rounded-md bg-green-600 text-white">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+           
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-2 rounded-md bg-green-400 shadow-sm shadow-green-600 hover:bg-green-600 transition-all duration-300 text-white">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="px-3 py-2 rounded-md bg-green-400 shadow-sm shadow-green-600 hover:bg-green-600 transition-all duration-300 text-white">Ultima &raquo;</a>
+            {% endif %}
+        </div>
+        <div class="text-center mt-6">
+            <a href="{% url 'core:index' %}"
+                class="inline-block w-32 px-2 py-2 rounded-md bg-red-400 shadow-sm shadow-red-600 hover:bg-red-600 transition-all duration-300 text-white">Volver</a>
+        </div>
     </div>
 </div>
 {% endblock content %}

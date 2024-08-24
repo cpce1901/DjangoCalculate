@@ -1,49 +1,57 @@
 {% load humanize %}
 
-<div class=" mx-2 my-6">
-    <h1 class="text-2xl font-bold text-black mb-4">Lista de Cálculo</h1>
-    <h2 class="text-xl font-semibold text-black mb-2">Items en la lista:</h2>
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border border-gray-300">
+{% load humanize %}
+<div class="mx-auto my-6 max-w-full overflow-hidden">
+    <h1 class="text-xl md:text-2xl font-bold text-black mb-4">Lista de Cálculo</h1>
+    <h2 class="text-lg md:text-xl font-semibold text-black mb-2">Items en la lista:</h2>
+    <div class="overflow-x-auto shadow-md rounded-lg">
+        <table class="w-full bg-white">
             <thead>
-                <tr class="bg-gray-100">
-                    <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
-                        Material</th>
-                    <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
-                        Área m2</th>
-                    <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
-                        Espesor mm</th>
-                    <th class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
-                        Acciones</th>
+                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-2 px-4 md:px-6 text-left font-semibold ">Material</th>
+                    <th class="py-2 px-4 md:px-6 text-center font-semibold">Área m²</th>
+                    <th class="py-2 px-4 md:px-6 text-center font-semibold">Espesor mm</th>
+                    <th class="py-2 px-4 md:px-6 text-center font-semibold"></th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200 text-center">
+            <tbody class="text-gray-600 text-sm font-light">
                 {% for item in items %}
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.material_name }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.area|floatformat:1|intcomma }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ item.thickness|floatformat:1|intcomma }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        <form method="get">
-
-                            <button hx-get="{% url 'calculate:co2-del' %}?index={{ forloop.counter0 }}"
-                                hx-target="#item-list" hx-swap="innerHTML"
-                                class="px-2 py-2 rounded-md bg-red-400 shadow-sm shadow-red-600 hover:bg-red-600 transition-all duration-300 text-white">
-                                Eliminar
-                            </button>
-                        </form>
+                <tr class="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-200">
+                    <td class="py-3 px-4 md:px-6 text-left whitespace-nowrap overflow-hidden text-ellipsis max-w-10 md:max-w-max">
+                        <span class="font-semibold text-base truncate">{{ item.material_name }}</span>
+                    </td>
+                    <td class="py-3 px-4 md:px-6 text-center whitespace-nowrap text-base font-medium">
+                        {{ item.area|floatformat:1|intcomma }}
+                    </td>
+                    <td class="py-3 px-4 md:px-6 text-center whitespace-nowrap text-base font-medium">
+                        {{ item.thickness|floatformat:1|intcomma }}
+                    </td>
+                    <td class="py-3 px-4 md:px-6 text-center">
+                        <button hx-get="{% url 'calculate:co2-del' %}?index={{ forloop.counter0 }}"
+                            hx-target="#item-list" hx-swap="innerHTML"
+                            class="focus:outline-none focus:shadow-outline transition-colors duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <circle cx="10" cy="10" r="10" fill="red" />
+                                <path fill="white" fill-rule="evenodd"
+                                    d="M6 6a1 1 0 011.414 0L10 8.586l2.586-2.586A1 1 0 1114 7.414L11.414 10l2.586 2.586a1 1 0 11-1.414 1.414L10 11.414l-2.586 2.586a1 1 0 11-1.414-1.414L8.586 10 6 7.414a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No hay
-                        items en la lista</td>
+                    <td colspan="4" class="py-3 px-4 md:px-6 text-center text-gray-500">
+                        No hay items en la lista
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+
 
 
 {% if message %}

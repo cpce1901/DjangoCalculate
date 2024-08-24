@@ -2,6 +2,7 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from .forms import ItemsForm
+from apps.materials.models import Materials
 
 class AddItemCO2View(View):
     def post(self, request, *args, **kwargs):
@@ -24,7 +25,7 @@ class AddItemCO2View(View):
             thickness = form.cleaned_data['thickness']
 
             new_item = {
-                'material.id': material.id,
+                'material_id': material.id,
                 'material_name': material.name,
                 'area': area,
                 'thickness': thickness,
@@ -81,13 +82,44 @@ class DeleteItemCO2View(View):
         return HttpResponse(html)
 
 
+# Vista HTMX para obtener resultados CO2
 class ResultCO2View(View):
+
+    def co2_calculate(self, items):
+        total_emision_m2 = 0
+        for item in items:
+            material_id = item['material_id']
+            material_name = item['material_name']
+            espesor = item['thickness']
+            area = item['area']
+            
+            # Obtener el material desde la base de datos
+            try:
+                material = Materials.objects.get(id=material_id)
+            except Materials.DoesNotExist:
+                print(f"No hay información para el material: {material_name}")
+                continue
+
+            densidad_kg_m3 = material.density
+            fe_kg_co2 = material.co2_factor
+
+            volumen_m3 = espesor * area
+            densidad_ton_m3 = densidad_kg_m3 / 1000
+            ton = densidad_ton_m3 * volumen_m3
+            emision_capa_kg_co2_ton = fe_kg_co2 * ton
+            emision_capa_kg_co2_m3 = emision_capa_kg_co2_ton * densidad_ton_m3
+            emision_capa_kg_co2_m2 = emision_capa_kg_co2_m3 * area
+
+            total_emision_m2 += emision_capa_kg_co2_m2
+
+        return total_emision_m2
+    
     def get(self, request, *args, **kwargs):
         session_id = request.session.get('session_id', None)
-        items = request.session.get(f'items_{session_id}', [])
+        items = request.session.get(f'items_{session_id}', [])       
 
         if items:
-            total_area = sum(item['area'] for item in items)
+            total_area = self.co2_calculate(items)
             context = {
                 'result': total_area,
                 'status': 'success',
@@ -125,7 +157,7 @@ class AddItemTRANSView(View):
             thickness = form.cleaned_data['thickness']
 
             new_item = {
-                'material.id': material.id,
+                'material_id': material.id,
                 'material_name': material.name,
                 'area': area,
                 'thickness': thickness,
