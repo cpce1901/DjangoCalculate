@@ -4,20 +4,17 @@
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <div class="bg-slate-100 rounded-md px-4 py-8 md:px-6 md:py-10 lg:w-5/6 xl:w-4/5 mx-auto">
-        <h1 class="text-2xl md:text-3xl font-semibold text-sky-500 mb-6 text-center">Formulario Cálculo Transmitancia</h1>
+        <h1 class="text-2xl md:text-3xl font-semibold text-sky-500 mb-6 text-center">Formulario Cálculo Transmitancia
+        </h1>
         <div
             class="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-4">
             <form method="post" hx-post="{% url 'calculate:trans-add' %}" hx-target="#item-list" hx-swap="innerHTML"
                 class="flex flex-col w-full lg:w-2/3 space-y-4">
                 {% csrf_token %}
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 md:gap-10">
                     <div class="flex flex-col">
                         <p class="font-exo text-sm font-semibold text-gray-500 mb-1">{{ form.materials.label }}</p>
                         {{ form.materials }}
-                    </div>
-                    <div class="flex flex-col">
-                        <p class="font-exo text-sm font-semibold text-gray-500 mb-1">{{ form.area.label }}</p>
-                        {{ form.area }}
                     </div>
                     <div class="flex flex-col">
                         <p class="font-exo text-sm font-semibold text-gray-500 mb-1">{{ form.thickness.label }}</p>
@@ -30,7 +27,8 @@
             </form>
 
             <div class="w-full lg:w-2/6 text-black p-4">
-                <div class="container flex flex-col justify-center items-center outline-gray-100 shadow-md rounded-md p-4">
+                <div
+                    class="container flex flex-col justify-center items-center outline-gray-100 shadow-md rounded-md p-4">
                     <p class="text-black font-exo font-bold text-xl md:text-2xl mb-2">Resultado</p>
                     <div id="result">
                         {% include 'calculate/trans/htmx/htmx_result.html' %}

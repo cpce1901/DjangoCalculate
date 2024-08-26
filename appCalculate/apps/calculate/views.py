@@ -1,12 +1,12 @@
 from django.views.generic import FormView
 from django.urls import reverse_lazy
-from .forms import ItemsForm
+from .forms import ItemsFormCO2, ItemsFormTrans
 import uuid
 
 
 class CalculateListCO2View(FormView):
     template_name = 'calculate/co2/co2_form.html'
-    form_class = ItemsForm
+    form_class = ItemsFormCO2
     success_url = reverse_lazy('core:index')
 
     def dispatch(self, request, *args, **kwargs):
@@ -30,7 +30,7 @@ class CalculateListCO2View(FormView):
 
 class CalculateListTRANSView(FormView):
     template_name = 'calculate/trans/trans_form.html'
-    form_class = ItemsForm
+    form_class = ItemsFormTrans
     success_url = reverse_lazy('core:index')
 
     def dispatch(self, request, *args, **kwargs):

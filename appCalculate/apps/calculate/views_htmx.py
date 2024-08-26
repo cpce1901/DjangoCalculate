@@ -1,24 +1,13 @@
-"""
-Django 5.1
-
-De que se trata
-
-Version
-
-Creador
-
-"""
-
 from django.views.generic import View
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from .forms import ItemsForm
+from .forms import ItemsFormCO2, ItemsFormTrans
 from apps.materials.models import Materials
 
 
 class AddItemCO2View(View):
     def post(self, request, *args, **kwargs):
-        form = ItemsForm(request.POST)
+        form = ItemsFormCO2(request.POST)
         session_id = request.session.get('session_id', None)
         items = request.session.get(f'items_{session_id}', [])
 
@@ -150,7 +139,7 @@ class ResultCO2View(View):
 
 class AddItemTRANSView(View):
     def post(self, request, *args, **kwargs):
-        form = ItemsForm(request.POST)
+        form = ItemsFormTrans(request.POST)
         session_id = request.session.get('session_id', None)
         items = request.session.get(f'items_{session_id}', [])
 
@@ -165,13 +154,11 @@ class AddItemTRANSView(View):
 
         if form.is_valid():
             material = form.cleaned_data['materials']
-            area = form.cleaned_data['area']
             thickness = form.cleaned_data['thickness']
 
             new_item = {
                 'material_id': material.id,
                 'material_name': material.name,
-                'area': area,
                 'thickness': thickness,
             }
 
@@ -179,7 +166,6 @@ class AddItemTRANSView(View):
             updated = False
             for item in items:
                 if item['material_name'] == new_item['material_name']:
-                    item['area'] = new_item['area']
                     item['thickness'] = new_item['thickness']
                     updated = True
                     break
@@ -208,9 +194,6 @@ class AddItemTRANSView(View):
 
 
 class DeleteItemTRANSView(View):
-    """
-    De que se trata cada clase
-    """
 
     def get(self, request, *args, **kwargs):
         # Funcion para obtener items
@@ -225,13 +208,11 @@ class DeleteItemTRANSView(View):
 
         context = {
             'items': items,
-            'total_area': sum(item['area'] for item in items),
         }
         html = render_to_string('calculate/trans/htmx/htmx_item_list.html', context)
         return HttpResponse(html)
 
 
-# Vista HTMX para obtener resultados 
 class ResultTRANSView(View):
 
     def result_trans(self, items):

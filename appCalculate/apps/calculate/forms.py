@@ -2,7 +2,7 @@ from django import forms
 from apps.materials.models import Materials
 
 
-class ItemsForm(forms.Form):
+class ItemsFormCO2(forms.Form):
 
     materials = forms.ModelChoiceField(
         queryset=Materials.objects.all(),
@@ -40,7 +40,36 @@ class ItemsForm(forms.Form):
         ),
     )
 
+ 
+class ItemsFormTrans(forms.Form):
+
+    materials = forms.ModelChoiceField(
+        queryset=Materials.objects.all(),
+        label="Material",
+        empty_label="MATERIALES",
+        widget=forms.Select(
+            attrs={
+                "id": "materials",
+                "class": "p-2 outline outline-1 outline-gray-300 rounded-lg text-black focus:outline-none appearance-none bg-white text-gray-600",
+            }
+        ),
+    )
+
+    thickness = forms.FloatField(
+        label="Espesor m",
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                "id": "thickness",
+                "placeholder": "Ingrese m",
+                "class": "p-2 outline outline-1 outline-gray-300 bg-white rounded-lg text-gray-600",
+            }
+        ),
+    )
+
     
+
+
 
 
 
