@@ -21,10 +21,10 @@
                         <span class="font-semibold text-base truncate">{{ item.material_name }}</span>
                     </td>
                     <td class="py-3 px-4 md:px-6 text-center whitespace-nowrap text-base font-medium">
-                        {{ item.area|floatformat:1|intcomma }}
+                        {{ item.area|floatformat:2|intcomma }}
                     </td>
                     <td class="py-3 px-4 md:px-6 text-center whitespace-nowrap text-base font-medium">
-                        {{ item.thickness|floatformat:1|intcomma }}
+                        {{ item.thickness|floatformat:2|intcomma }}
                     </td>
                     <td class="py-3 px-4 md:px-6 text-center">
                         <button hx-get="{% url 'calculate:co2-del' %}?index={{ forloop.counter0 }}"
